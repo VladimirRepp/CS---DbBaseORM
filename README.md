@@ -32,11 +32,11 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 ======================
 - To implement the data model, you need to create a new class and inherit from the IBaseModel interface and implement all its actions
  * Example: class DbUser : IBaseModel { ... }
-Ways to work with controllers
-- (I) To implement a controller for a specific model, you can create a new class and inherit from DbBaseController abstract class with the model template type. With this option, it is convenient to add and change new actions.
- * Example: class DbUserController : DbBaseController <DbUser> { ... }
-- (II) You can immediately use an instance of the Db Base Controller class with the template type of the implemented model
- * Example:  DbBaseController <DbUser> users = new("NAME_YOUR_PROVIDER");
+- Ways to work with controllers
+ - (I) To implement a controller for a specific model, you can create a new class and inherit from DbBaseController abstract class with the model template type. With this option, it is convenient to add and change new actions.
+  * Example: class DbUserController : DbBaseController <DbUser> { ... }
+ - (II) You can immediately use an instance of the Db Base Controller class with the template type of the implemented model
+  * Example:  DbBaseController <DbUser> users = new("NAME_YOUR_PROVIDER");
 
 === Actions: ===
 ======================
