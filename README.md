@@ -20,7 +20,8 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 - Default data types of fields in the database: id:int, other fields: varchar
 - Otherwise, use the overloaded method with the List<DbParametr> args parameters for inserting and updating data
 
-===  Actions that implement a query to the database and, if successful, make changes to the local data: ===
+===  Actions: ===
+That implement a query to the database and, if successful, make changes to the local data:
     Synchronous:
     - Query_SelectAll
     - Query_SelectById
