@@ -33,7 +33,7 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 - To implement the data model, you need to create a new class and inherit from the IBaseModel interface and implement all its actions
   * Example: class DbUser : IBaseModel { ... }
 
-Ways to work with controllers
+Ways to work with controllers: Each controller is associated with a single table !
 - (I) To implement a controller for a specific model, you can create a new class and inherit from DbBaseController abstract class with the model template type. With this option, it is convenient to add and change new actions.
   * Example: class DbUserController : DbBaseController <DbUser> { ... }
 - (II) You can immediately use an instance of the Db Base Controller class with the template type of the implemented model
@@ -42,36 +42,35 @@ Ways to work with controllers
 === Actions: ===
 ======================
 That implement a query to the database and, if successful, make changes to the local data:
-    - Synchronous:
-     - Query_SelectAll
-     - Query_SelectById
-     - Query_SelectByQuery (2 overloads)
-     - Query_SelectsByQuery (2 overloads)
-     - Query_TrySelectById
-     - Query_Insert (2 overloads)
-     - Query_Update (2 overloads)
-     - Query_DeleteById
-     - Query_ClearTable
-     - Request_GetLastId
-     - Query_Save (2 overloads)
-     - Query_Execute (2 overloads)
-     - Query_ExecuteReader
-     - Query_ExecuteReaders
-    - Asynchronous analogues:
-     - Query_SelectAllAsync
-     - Query_SelectByIdAsync
-     - Query_SelectByQueryAsync (2 overloads)
-     - Query_SelectsByQueryAsync (2 overloads)
-     - Query_TrySelectByIdAsync
-     - Query_InsertAsync (2 overloads)
-     - Query_UpdateAsync (2 overloads)
-     - Query_DeleteByIdAsync
-     - Query_ClearTableAsync
-     - Request_GetLastIdAsync
-     - Query_SaveAsync (2 overloads)
-     - Query_ExecuteAsync (2 overloads)
-     - Query_ExecuteReaderAsync
-     - Query_ExecuteReadersAsync
+- Synchronous:
+  * Query_SelectAll: Requesting a selection of all data from a database table to a local list Data(List<T>)
+  * Query_SelectById: Requesting data selection by ID from a database table to a local variable
+  * Query_SelectByQuery (2 overloads): Fetching data by query string to a local variable
+  * Query_SelectsByQuery (2 overloads): Fetching data by query string to a local list
+  * Query_TrySelectById: An attempt to get data by ID from a database table to a local variable
+  * Query_Insert (2 overloads): Inserting data into Data (List<T>) and requesting an insert into the database
+  * Query_Update (2 overloads): Updating data in Data (List<T>) and requesting an update in the database
+  * Query_DeleteById: Deleting data by ID in Data (List<T>) and requesting deletion in the database
+  * Query_ClearTable: Clearing Data (List<T>) and requesting a table cleanup in the database
+  * Request_GetLastId: Return the last largest ID to the database tables
+  * Query_Save (2 overloads): Saving local data in the database. A transaction is being used
+  * Query_Execute (2 overloads): Make a query to the database
+  * Query_ExecuteReader: Run a query to the database with the returned result in a local variable
+  * Query_ExecuteReaders: Run a query to the database with the returned result in a local list
+- Asynchronous analogues:
+  * Query_SelectAllAsync: Asynchronous request to fetch all data to a local list Data (List<T>)
+  * Query_SelectByIdAsync: Asynchronous selection request by ID to a local variable
+  * Query_SelectByQueryAsync (2 overloads): Asynchronous fetching of data by query string to a local variable
+  * Query_SelectsByQueryAsync (2 overloads): Asynchronous fetching of data by query string to a local list
+  * Query_InsertAsync (2 overloads): Asynchronous insertion of data into Data (List<T>) and query for insertion into the database
+  * Query_UpdateAsync (2 overloads): Asynchronous updating of data in Data (List<T>) and requesting an update in the database
+  * Query_DeleteByIdAsync: Asynchronous deletion of data from Data (List<T>) and request deletion from the database
+  * Query_ClearTableAsync: Asynchronous Data cleanup (List<T>) and a table cleanup request in the database
+  * Request_GetLastIdAsync: Asynchronous request to the database for the return of the last largest ID
+  * Query_SaveAsync (2 overloads): Asynchronous storage of local data in the database. A transaction is being used
+  * Query_ExecuteAsync (2 overloads): Make an asynchronous database request
+  * Query_ExecuteReaderAsync: Execute an asynchronous query to the database with the result returned to a local variable
+  * Query_ExecuteReadersAsync: Execute an asynchronous query to the database with the result returned to a local list
 
 === Attention! ===
 ======================
