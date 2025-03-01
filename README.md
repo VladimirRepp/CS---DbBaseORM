@@ -18,9 +18,25 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 ======================
 - Registration of the provider's factory is required, depending on the chosen platform
 - The provider is selected from the configuration file (App.config)
+- The connection string is taken from the configuration file (App.config)
 - When working with a Microsoft office package (for example, Access database), you must select the build size of the project in accordance with the office size
 - Default data types of fields in the database: id:int, other fields: varchar
 - Otherwise, use the overloaded method with the List<DbParametr> args parameters for inserting and updating data
+
+=== Description of architectural principles: ===
+======================
+- The abstract DbBaseController class implements the entire logic of actions with local data and databases
+- All data models must be inherited from the IBaseModel interface, which contains common properties and methods
+
+=== Example of work: ===
+======================
+- To implement the data model, you need to create a new class and inherit from the IBaseModel interface and implement all its actions
+ * Example: class DbUser : IBaseModel { ... }
+Ways to work with controllers
+- (I) To implement a controller for a specific model, you can create a new class and inherit from DbBaseController abstract class with the model template type. With this option, it is convenient to add and change new actions.
+ * Example: class DbUserController : DbBaseController <DbUser> { ... }
+- (II) You can immediately use an instance of the Db Base Controller class with the template type of the implemented model
+ * Example:  DbBaseController <DbUser> users = new("NAME_YOUR_PROVIDER");
 
 === Actions: ===
 ======================
@@ -64,7 +80,7 @@ Before using it, make sure that the code in your project is working correctly. C
 ======================
 - IDE: MVS 2022
 - C# / .Net9 / Console App
-- SQL Server (2022)
+- SQL Server (2022) - local server
 - Successfully tested methods
   - Query_Insert
   - Query_InsertAsync
