@@ -21,7 +21,7 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 - Otherwise, use the overloaded method with the List<DbParametr> args parameters for inserting and updating data
 
 ===  Actions: ===
-That implement a query to the database and, if successful, make changes to the local data:
+- That implement a query to the database and, if successful, make changes to the local data:
     ======================
     - Synchronous:
     - Query_SelectAll
@@ -56,6 +56,7 @@ That implement a query to the database and, if successful, make changes to the l
     - Query_ExecuteReadersAsync
 
 === Attention! ===
+
 Before using it, make sure that the code in your project is working correctly. Correct operation is NOT guaranteed, comprehensive testing is required within your system.
 
 === Health test №1: ===
