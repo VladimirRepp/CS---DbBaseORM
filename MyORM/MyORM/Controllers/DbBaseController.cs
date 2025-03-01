@@ -1,8 +1,6 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.OleDb;
-using System.Reflection.Metadata;
 using MyORM.Models;
 
 namespace MyORM.Controllers
@@ -146,7 +144,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Запрос выбороки всех данных из таблицы БД
+        /// Запрос выбороки всех данных из таблицы БД в локальный список Data(List<T>)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -188,7 +186,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Запрос выборки данных по ID из таблицы БД
+        /// Запрос выборки данных по ID из таблицы БД в локальную переменную
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -235,7 +233,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса
+        /// Выборка данных по строке запроса в локальную переменную
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -287,7 +285,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами 
+        /// Выборка данных по строке запроса с указанными параметрами в локальную переменную 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -334,7 +332,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса
+        /// Выборка данных по строке запроса в локальный список
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -388,7 +386,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами 
+        /// Выборка данных по строке запроса с указанными параметрами в локальный список
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -437,7 +435,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Попытка получить данные по ID из таблицы БД
+        /// Попытка получить данные по ID из таблицы БД в локальную переменную
         /// </summary>
         /// <param name="id"></param>
         /// <param name="found"></param>
@@ -930,7 +928,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить запрос к БД с возвращаемым результатом
+        /// Выполнить запрос к БД с возвращаемым результатом в локальную переменную 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
@@ -1017,7 +1015,7 @@ namespace MyORM.Controllers
 
         #region === Asynchronous actions with local Data and Query in DB === 
         /// <summary>
-        /// Асинхронное открытие соединения к БД
+        /// Асинхронное открытие соединения к БД 
         /// </summary>
         /// <returns></returns>
         private async Task OpenConnectionAsync()
@@ -1037,7 +1035,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронный запрос выборки всех данных
+        /// Асинхронный запрос выборки всех данных в локальный список Data(List<T>)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1079,7 +1077,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронный запрос выборки по ID 
+        /// Асинхронный запрос выборки по ID в локальную переменную 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1126,7 +1124,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса
+        /// Асинхронная выборка данных по строке запроса в локальную переменную
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -1545,7 +1543,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронная очиста Data (List<T>) и запрос очистки таблицы в БД
+        /// Асинхронная очистка Data (List<T>) и запрос очистки таблицы в БД
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1801,7 +1799,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД с возвращаемым результатом
+        /// Выполнить асинхронный запрос к БД с возвращаемым результатом в локальную переменную 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
@@ -1844,7 +1842,7 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД с возвращаемым результатом
+        /// Выполнить асинхронный запрос к БД с возвращаемым результатом в локальный список 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
