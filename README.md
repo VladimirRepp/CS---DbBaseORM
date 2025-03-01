@@ -1,7 +1,6 @@
 # CS---SimpleORM
 A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 
-======================
 === Release Notes: ===
 ======================
 - v0.1
@@ -15,7 +14,6 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
   * Microsoft.Data.SqlClient (6.0.1)
   * System.Data.OleDb (9.0.2)
 
-======================
 === Description: ===
 ======================
 - Registration of the provider's factory is required, depending on the chosen platform
@@ -24,7 +22,6 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 - Default data types of fields in the database: id:int, other fields: varchar
 - Otherwise, use the overloaded method with the List<DbParametr> args parameters for inserting and updating data
 
-======================
 === Actions: ===
 ======================
 That implement a query to the database and, if successful, make changes to the local data:
@@ -59,12 +56,10 @@ That implement a query to the database and, if successful, make changes to the l
      - Query_ExecuteReaderAsync
      - Query_ExecuteReadersAsync
 
-======================
 === Attention! ===
 ======================
 Before using it, make sure that the code in your project is working correctly. Correct operation is NOT guaranteed, comprehensive testing is required within your system.
 
-======================
 === Health test №1: ===
 ======================
 - IDE: MVS 2022
