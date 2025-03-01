@@ -22,7 +22,8 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 
 ===  Actions: ===
 That implement a query to the database and, if successful, make changes to the local data:
-    Synchronous:
+    ======================
+    - Synchronous:
     - Query_SelectAll
     - Query_SelectById
     - Query_SelectByQuery (2 overloads)
@@ -37,7 +38,8 @@ That implement a query to the database and, if successful, make changes to the l
     - Query_Execute (2 overloads)
     - Query_ExecuteReader
     - Query_ExecuteReaders
-    Asynchronous analogues:
+      ======================
+    - Asynchronous analogues:
     - Query_SelectAllAsync
     - Query_SelectByIdAsync
     - Query_SelectByQueryAsync (2 overloads)
