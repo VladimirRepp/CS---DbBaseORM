@@ -5,12 +5,6 @@ using System.Data.Common;
 
 namespace MyORM
 {
-    /// <summary>
-    /// Внимание! 
-    /// Необходимо установить разрядность сборки 
-    /// соответсвующей разрядности пакета майкрософт офис.
-    /// На данном проекте выбрана x86.
-    /// </summary>
     internal class Program
     {
         static async Task Main(string[] args)
