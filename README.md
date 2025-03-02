@@ -19,7 +19,7 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 - Registration of the provider's factory is required, depending on the chosen platform
 - The provider is selected from the configuration file (App.config)
 - The connection string is taken from the configuration file (App.config)
-- When working with a Microsoft office package (for example, Access database), you must select the build size of the project in accordance with the office size
+- When working with a Microsoft office package (for example, Access database), you must select the build size of the project in accordance with the office size (x64, x86)
 - Default data types of fields in the database: id:int, other fields: varchar
 - Otherwise, use the overloaded method with the List<DbParametr> args parameters for inserting and updating data
 
