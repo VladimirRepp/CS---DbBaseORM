@@ -96,7 +96,7 @@ namespace MyORM.Controllers
         /// <summary>
         /// Открытие соединения к БД
         /// </summary>
-        private void OpenConnection()
+        protected void OpenConnection()
         {
             if (_dbConnection.State != ConnectionState.Open)
                 _dbConnection.Open();
@@ -105,7 +105,7 @@ namespace MyORM.Controllers
         /// <summary>
         /// Закрытие соединения к БД
         /// </summary>
-        private void CloseConnection()
+        protected void CloseConnection()
         {
             if (_dbConnection.State != ConnectionState.Closed)
                 _dbConnection.Close();
@@ -1018,7 +1018,7 @@ namespace MyORM.Controllers
         /// Асинхронное открытие соединения к БД 
         /// </summary>
         /// <returns></returns>
-        private async Task OpenConnectionAsync()
+        protected async Task OpenConnectionAsync()
         {
             if (_dbConnection.State != ConnectionState.Open)
                 await _dbConnection.OpenAsync();
@@ -1028,7 +1028,7 @@ namespace MyORM.Controllers
         /// Асинхронное закрытие соединения к БД
         /// </summary>
         /// <returns></returns>
-        private async Task CloseConnectionAsync()
+        protected async Task CloseConnectionAsync()
         {
             if (_dbConnection.State != ConnectionState.Closed)
                 await _dbConnection.CloseAsync();
