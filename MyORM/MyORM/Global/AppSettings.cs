@@ -1,19 +1,43 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 
 namespace MyORM.Global
 {
-    public static class AppSettings
+    /// <summary>
+    /// Одиночка. Настройки приложенния. 
+    /// </summary>
+    public class AppSettings
     {
-        public static string DB_PROVIDER_NAME = "Microsoft.Data.SqlClient";
+        private static AppSettings INSTANCE;
+
+        public string DB_PROVIDER_NAME = "Microsoft.Data.SqlClient";
+
+        private AppSettings()
+        {
+            Startup();
+        }
+
+        public static AppSettings GetInstance
+        {
+            get
+            {
+                if (INSTANCE == null)
+                {
+                    INSTANCE = new AppSettings();
+                }
+
+                return INSTANCE;
+            }
+        }
 
         /// <summary>
-        /// Установка начальных настроек приложения: 
+        /// Вызывается в конструкторе. При необходимости можно вызвать из вне. 
+        /// Установка начальных настроек приложения:
         /// - регистрация фабрик провайдеров; 
         /// - добавить при необходимости ...
         /// </summary>
-        public static void Startup()
+        public void Startup()
         {
-            DbProviderFactories.RegisterFactory("System.Data.OleDb", System.Data.OleDb.OleDbFactory.Instance);
+            // DbProviderFactories.RegisterFactory("System.Data.OleDb", System.Data.OleDb.OleDbFactory.Instance);
             DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient", Microsoft.Data.SqlClient.SqlClientFactory.Instance);
         }
     }
