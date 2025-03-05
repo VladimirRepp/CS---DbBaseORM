@@ -12,7 +12,7 @@ namespace MyORM
             AppSettings.GetInstance.Startup();
 
             // === Testing === //
-            DbUserController users = new(AppSettings.GetInstance.DB_PROVIDER_NAME);
+            DbUserController users = new(AppSettings.GetInstance.DbProviderNameCurrent);
 
             // === Inserting === //
             DbUser d = new(0, 1, "Name 1", "Nick 1", "log1", "pas1", "Admin");
