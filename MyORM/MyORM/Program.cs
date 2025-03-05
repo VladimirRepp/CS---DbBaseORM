@@ -1,4 +1,4 @@
-﻿using MyORM.Controllers;
+using MyORM.Controllers;
 using MyORM.Global;
 using MyORM.Models;
 using System.Data.Common;
@@ -9,10 +9,10 @@ namespace MyORM
     {
         static async Task Main(string[] args)
         {
-            AppSettings.Startup();
+            AppSettings.GetInstance.Startup();
 
             // === Testing === //
-            DbUserController users = new(AppSettings.DB_PROVIDER_NAME);
+            DbUserController users = new(AppSettings.GetInstance.DB_PROVIDER_NAME);
 
             // === Inserting === //
             DbUser d = new(0, 1, "Name 1", "Nick 1", "log1", "pas1", "Admin");
