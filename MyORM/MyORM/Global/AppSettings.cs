@@ -9,7 +9,7 @@ namespace MyORM.Global
     {
         private static AppSettings INSTANCE;
 
-        public string DB_PROVIDER_NAME = "Microsoft.Data.SqlClient";
+        public string DbProviderNameCurrent = "Microsoft.Data.SqlClient";
 
         private AppSettings()
         {
