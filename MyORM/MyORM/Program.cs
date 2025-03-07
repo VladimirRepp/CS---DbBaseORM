@@ -13,8 +13,8 @@ namespace MyORM
 
             // === Testing === //
             DbUserController users = new(
-                AppSettings.Instance.DbProviderNameCurrent, 
-                AppSettings.Instance.GetConnectionStringByName("DbTypeSQL")
+                AppSettings.Instance.CurrentDbProviderName , 
+                AppSettings.Instance.GetConnectionStringByName("DbTypeSQL") // AppSettings.Instance.GetCurrentConnectionString()
                 );
 
             // === Inserting === //
