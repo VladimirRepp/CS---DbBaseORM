@@ -40,7 +40,7 @@ namespace MyORM.Controllers
         /// <param name="login_user"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public bool Query_TryLogin(string telegramId, string pass, out DbUser login_user)
+        public bool Query_TryLogin(long telegramId, string pass, out DbUser login_user)
         {
             try
             {
