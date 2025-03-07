@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Data.Common;
 
 namespace MyORM.Global
@@ -9,6 +9,7 @@ namespace MyORM.Global
     public class AppSettings
     {
         private static AppSettings INSTANCE;
+        private static readonly object PADLOCK = new object();
 
         public string DbProviderNameCurrent = "Microsoft.Data.SqlClient";
 
@@ -17,13 +18,16 @@ namespace MyORM.Global
             Startup();
         }
 
-        public static AppSettings GetInstance
+        public static AppSettings Instance
         {
             get
             {
-                if (INSTANCE == null)
+                lock (PADLOCK)
                 {
-                    INSTANCE = new AppSettings();
+                    if (INSTANCE == null)
+                    {
+                        INSTANCE = new AppSettings();
+                    }
                 }
 
                 return INSTANCE;
