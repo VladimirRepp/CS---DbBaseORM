@@ -11,7 +11,8 @@ namespace MyORM.Global
         private static AppSettings INSTANCE;
         private static readonly object PADLOCK = new object();
 
-        public string DbProviderNameCurrent = "Microsoft.Data.SqlClient";
+        public string CurrentDbProviderName = "Microsoft.Data.SqlClient";
+        public string CurrentDbConnectionName = "DbTypeLocalSQL";
 
         private AppSettings()
         {
@@ -84,6 +85,15 @@ namespace MyORM.Global
             }
 
             return found_value;
+        }
+
+        /// <summary>
+        /// Возвращает строку подключения по имени поля CurrentDbConnectionName из AppConfig 
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentConnectionString()
+        {
+            return GetConnectionStringByName(CurrentDbConnectionName);
         }
 
         /// <summary>
