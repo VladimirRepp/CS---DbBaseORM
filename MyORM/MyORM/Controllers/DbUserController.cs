@@ -1,4 +1,4 @@
-﻿using MyORM.Models;
+using MyORM.Models;
 
 namespace MyORM.Controllers
 {
@@ -11,22 +11,22 @@ namespace MyORM.Controllers
         }
 
         /// <summary>
-        /// Попробовать получить пользователя по логину 
+        /// Попробовать получить пользователя по TelegramId 
         /// </summary>
         /// <param name="log"></param>
         /// <param name="found_user"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public bool Query_TrySelectByLogin(string log, out DbUser found_user)
+        public bool Query_TrySelectByTelegramId(long t_id, out DbUser found_user)
         {
             try
             {
-                string query = $"select * from {_tableName} where Login = @param0";
-                found_user = Query_SelectByQuery(query, log);
+                string query = $"select * from {_tableName} where TelegramId = @param0";
+                found_user = Query_SelectByQuery(query, t_id.ToString());
             }
             catch (Exception ex)
             {
-                throw new Exception($"DbUserController.Query_TrySelectByLogin(Exception): {ex.Message}");
+                throw new Exception($"DbUserController.Query_TrySelectByTelegramID(Exception): {ex.Message}");
             }
 
             return found_user != null;
@@ -40,12 +40,12 @@ namespace MyORM.Controllers
         /// <param name="login_user"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public bool Query_TryLogin(string log, string pass, out DbUser login_user)
+        public bool Query_TryLogin(string telegramId, string pass, out DbUser login_user)
         {
             try
             {
-                string query = $"select * from {_tableName} where Login = @param0 and Password = @param1";
-                login_user = Query_SelectByQuery(query, log, pass);
+                string query = $"select * from {_tableName} where TelegramId = @param0 and Password = @param1";
+                login_user = Query_SelectByQuery(query, telegramId, pass);
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace MyORM.Controllers
             try
             {
                 isDone = Query_Insert(new_user);
-                Query_TrySelectByLogin(new_user.Login, out new_user);
+                Query_TrySelectByTelegramId(new_user.TelegramId, out new_user);
             }
             catch (Exception ex)
             {
