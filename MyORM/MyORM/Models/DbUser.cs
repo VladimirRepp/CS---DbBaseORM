@@ -23,14 +23,14 @@ namespace MyORM.Models
         public string[] ToArrayStr => new string[] { TelegramId.ToString(), FullName, NickName, Password, Role };
 
         public DbUser() { }
-        public DbUser(int id, long telegramId, string fullname, string nickname, string login, string password, string role) 
+        public DbUser(int id, long TelegramId, string FullName, string NickName, string Password, string Role) 
         { 
             _id = id;
-            TelegramId = telegramId;
-            FullName = fullname;
-            NickName = nickname;
-            Password = password;
-            Role = role;
+            TelegramId = TelegramId;
+            FullName = FullName;
+            NickName = NickName;
+            Password = Password;
+            Role = Role;
         }
         public DbUser(ref DbDataReader reader) 
         {
