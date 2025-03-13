@@ -26,11 +26,11 @@ namespace MyORM.Models
         public DbUser(int id, long TelegramId, string FullName, string NickName, string Password, string Role) 
         { 
             _id = id;
-            TelegramId = TelegramId;
-            FullName = FullName;
-            NickName = NickName;
-            Password = Password;
-            Role = Role;
+            this.TelegramId = TelegramId;
+            this.FullName = FullName;
+            this.NickName = NickName;
+            this.Password = Password;
+            this. Role = Role;
         }
         public DbUser(ref DbDataReader reader) 
         {
