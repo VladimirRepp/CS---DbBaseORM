@@ -120,3 +120,8 @@ Before using it, make sure that the code in your project is working correctly. C
 ![7](https://github.com/user-attachments/assets/3c80562c-9437-47ec-a99e-45972ef08b67)
 
 ![7_1](https://github.com/user-attachments/assets/10e27a15-6d82-4e2a-b800-0883056d35d6)
+
+=== TODO on next release: ===
+======================
+1. Add bool flag - isChanchedLockalData in all methods Qeury_
+2. Update Insering - add load last id for inserting data
