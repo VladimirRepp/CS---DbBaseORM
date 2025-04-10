@@ -201,34 +201,43 @@ Before using it, make sure that the code in your project is working correctly. C
   - Query_SaveAsync
   - Query_ClearTableAsync
  - Output example:
+![1](https://github.com/user-attachments/assets/d00ec76e-7898-404e-aa0c-ac25f825fb02)
+     Example of Insert and InsertAsync
 
-![1](https://github.com/user-attachments/assets/bcc598f7-0fe8-413f-8da3-dedd96e1593d)
+![2](https://github.com/user-attachments/assets/00f6d5ca-7255-4198-9d26-dc49974668ff)
+     Example of Select
+     
+![3](https://github.com/user-attachments/assets/5778b7f7-dc71-4973-81fe-6817f323b0d8)
+     Example of SelectAsync
 
-![1_1](https://github.com/user-attachments/assets/a1d49c8a-a2fb-40b1-95ff-75a009997ebf)
-
-![2](https://github.com/user-attachments/assets/59a01924-ef07-4893-9814-de745d932c11)
-   
-![3](https://github.com/user-attachments/assets/785c2bca-3d0d-4970-8ae5-c206af7ada74)
-
-![3_1](https://github.com/user-attachments/assets/e4a94e35-c7ab-4c3f-b5ff-509be4975af6)
-
-![4](https://github.com/user-attachments/assets/1836eb39-e95c-44e4-98e1-2d50025a1f8a)
-
-![4_1](https://github.com/user-attachments/assets/4a15c50a-0858-416f-87ff-d0a0a2709e2f)
-
-![5](https://github.com/user-attachments/assets/2bbeb5f2-f2e1-409b-89c0-ade29cf2d8a0)
-
-![5_1](https://github.com/user-attachments/assets/e499d78b-ce1c-400d-badc-d3b9cdc66bd3)
-
-![6](https://github.com/user-attachments/assets/1f7db1bc-b35a-4682-9c62-d03ab76f06de)
-
-![6_1](https://github.com/user-attachments/assets/8852899e-999c-4e62-ba03-88cdd4e410c7)
-
-![7](https://github.com/user-attachments/assets/3c80562c-9437-47ec-a99e-45972ef08b67)
-
-![7_1](https://github.com/user-attachments/assets/10e27a15-6d82-4e2a-b800-0883056d35d6)
+![4](https://github.com/user-attachments/assets/d8849e65-cf27-4b2f-86fa-3715a5ba5f97)
+     Example of UpdateById and UpdateByIdAsync
+     
+![5](https://github.com/user-attachments/assets/acdc068a-876b-485b-8984-b5d92bbbcdd0)
+     Example of DeleteById and DeleteByIdAsync
+ 
+![6](https://github.com/user-attachments/assets/b848a7c3-6fe7-450c-93e6-43dd2009bc5b)
+     Example of Save (with data inside)
+ 
+![7](https://github.com/user-attachments/assets/2adda5d5-23d4-487f-b55e-1ba6d6b97f0a)
+     Example of SaveAsync (with data inside)
+ 
+![8](https://github.com/user-attachments/assets/2d23130e-53b7-416c-8697-8401853144a0)
+     Example of Save (with data outside and isChangeLocalData: false)
+ 
+![9](https://github.com/user-attachments/assets/0ac50aee-9587-4475-ae77-e5ab44f72219)
+     Example of Save (with data outside and isChangeLocalData: true)
+ 
+![10](https://github.com/user-attachments/assets/cd34c130-0d60-4ea3-aeb4-0678a77a43d6)
+     Example of SaveAsync (with data outside and isChangeLocalData: false)
+ 
+![11](https://github.com/user-attachments/assets/501256a9-0fa0-48ea-bb8c-052b65f709f4)
+     Example of SaveAsync (with data outside and isChangeLocalData: true)
+ 
+![12](https://github.com/user-attachments/assets/2a71b9aa-b034-454f-8659-04981c46f9b6)
+     Example of ClearTable and ClearTableAsync
+ 
 
 === TODO on next release: ===
 ======================
-1. Add bool flag - isChanchedLockalData in all methods Qeury_
-2. Update Insering - add load last id for inserting data
+1. Finding and fixing bugs
