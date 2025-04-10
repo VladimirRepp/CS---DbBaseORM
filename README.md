@@ -1,4 +1,4 @@
-# CS---SimpleORM
+# CS---DbBaseORM
 A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 
 === Release Notes: ===
