@@ -3,7 +3,7 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 
 === Release Notes: ===
 ======================
-- v0.1
+- v1.0
 - IDE: MVS 2022
 - C# / .Net9 / Console App
 - ADO.Net
