@@ -201,7 +201,10 @@ Before using it, make sure that the code in your project is working correctly. C
   - Query_SaveAsync
   - Query_ClearTableAsync
  - Output example:
-   
+
+Example of Init new dbUserController:
+![0](https://github.com/user-attachments/assets/91ad3b7e-94fb-40ee-8910-366621fb7c46)
+
 Example of Insert and InsertAsync:
 ![1](https://github.com/user-attachments/assets/d00ec76e-7898-404e-aa0c-ac25f825fb02)
      
