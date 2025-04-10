@@ -41,37 +41,144 @@ Ways to work with controllers: Each controller is associated with a single table
 
 === Actions: ===
 ======================
-That implement a query to the database and, if successful, make changes to the local data:
-- Synchronous:
-  * Query_SelectAll: Requesting a selection of all data from a database table to a local list Data(List<T>)
-  * Query_SelectById: Requesting data selection by ID from a database table to a local variable
-  * Query_SelectByQuery (2 overloads): Fetching data by query string to a local variable
-  * Query_SelectsByQuery (2 overloads): Fetching data by query string to a local list
-  * Query_TrySelectById: An attempt to get data by ID from a database table to a local variable
-  * Query_Insert (2 overloads): Inserting data into Data (List<T>) and requesting an insert into the database
-  * Query_Update (2 overloads): Updating data in Data (List<T>) and requesting an update in the database
-  * Query_DeleteById: Deleting data by ID in Data (List<T>) and requesting deletion in the database
-  * Query_ClearTable: Clearing Data (List<T>) and requesting a table cleanup in the database
-  * Request_GetLastId: Return the last largest ID to the database tables
-  * Query_Save (2 overloads): Saving local data in the database. A transaction is being used
-  * Query_Execute (2 overloads): Make a query to the database
-  * Query_ExecuteReader: Run a query to the database with the returned result in a local variable
-  * Query_ExecuteReaders: Run a query to the database with the returned result in a local list
-- Asynchronous analogues:
-  * Query_SelectAllAsync: Asynchronous request to fetch all data to a local list Data (List<T>)
-  * Query_SelectByIdAsync: Asynchronous selection request by ID to a local variable
-  * Query_SelectByQueryAsync (2 overloads): Asynchronous fetching of data by query string to a local variable
-  * Query_SelectsByQueryAsync (2 overloads): Asynchronous fetching of data by query string to a local list
-  * Query_InsertAsync (2 overloads): Asynchronous insertion of data into Data (List<T>) and query for insertion into the database
-  * Query_UpdateAsync (2 overloads): Asynchronous updating of data in Data (List<T>) and requesting an update in the database
-  * Query_DeleteByIdAsync: Asynchronous deletion of data from Data (List<T>) and request deletion from the database
-  * Query_ClearTableAsync: Asynchronous Data cleanup (List<T>) and a table cleanup request in the database
-  * Request_GetLastIdAsync: Asynchronous request to the database for the return of the last largest ID
-  * Query_SaveAsync (2 overloads): Asynchronous storage of local data in the database. A transaction is being used
-  * Query_ExecuteAsync (2 overloads): Make an asynchronous database request
-  * Query_ExecuteReaderAsync: Execute an asynchronous query to the database with the result returned to a local variable
-  * Query_ExecuteReadersAsync: Execute an asynchronous query to the database with the result returned to a local list
+### **DbBaseController<T> Method Summary**
 
+#### **Constructor**
+- **DbBaseController(string providerName, string connectionString, string tableName = "")**  
+  Initializes the controller with database provider, connection string, and optional table name. Sets up the database connection.
+
+---
+
+#### **Synchronous Methods**
+
+##### **Connection Management**
+- **OpenConnection()**  
+  Opens the database connection if it's not already open.
+- **CloseConnection()**  
+  Closes the database connection if it's not already closed.
+
+##### **Data Retrieval**
+- **GetInedxById(int id)**  
+  Returns the index of an item in `_data` by its ID.
+- **GetById(int id)**  
+  Retrieves an item from `_data` by its ID.
+- **TryGetById(int id, out T? findemItem)**  
+  Attempts to retrieve an item from `_data` by its ID; returns `true` if found.
+- **Query_SelectAll(bool isChangeLocalData = false)**  
+  Retrieves all records from the database table, optionally updating `_data`.
+- **Query_SelectById(int id)**  
+  Retrieves a single record from the database by ID.
+- **Query_SelectByQuery(string query, params string[] args)**  
+  Executes a custom query with parameters and returns a single record.
+- **Query_SelectByQuery(string query, List<DbParameter> args)**  
+  Executes a custom query with `DbParameter` parameters and returns a single record.
+- **Query_SelectsByQuery(string query, params string[] args)**  
+  Executes a custom query with parameters and returns multiple records.
+- **Query_SelectsByQuery(string query, List<DbParameter> args)**  
+  Executes a custom query with `DbParameter` parameters and returns multiple records.
+- **Query_TrySelectById(int id, out T found)**  
+  Attempts to retrieve a record by ID; returns `true` if found.
+
+##### **Data Modification**
+- **Query_Insert(T d, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Inserts a record into the database, optionally updating `_data` and handling ID generation.
+- **Query_Insert(T d, List<DbParameter> args, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Inserts a record using `DbParameter` parameters, optionally updating `_data`.
+- **Query_UpdateById(T d, bool isChangeLocalData = false)**  
+  Updates a record in the database by ID, optionally updating `_data`.
+- **Query_UpdateById(T d, List<DbParameter> args, bool isChangeLocalData = false)**  
+  Updates a record using `DbParameter` parameters, optionally updating `_data`.
+- **Query_DeleteById(int id, bool isChangeLocalData = false)**  
+  Deletes a record by ID, optionally updating `_data`.
+- **Query_ClearTable()**  
+  Clears the database table and `_data`.
+- **Query_Save(bool isParamQueryWithId = false)**  
+  Saves `_data` to the database in a transaction (truncates table first).
+- **Query_Save(List<DbParameter> args, bool isParamQueryWithId = false)**  
+  Saves `_data` to the database using `DbParameter` parameters in a transaction.
+- **Query_Save(ref List<T> data, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Saves an external list to the database in a transaction, optionally updating `_data`.
+- **Query_Save(ref List<T> data, List<DbParameter> args, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Saves an external list using `DbParameter` parameters in a transaction, optionally updating `_data`.
+
+##### **Utility Methods**
+- **Query_Execute(string query)**  
+  Executes a raw SQL query.
+- **Query_Execute(string query, List<DbParameter> args)**  
+  Executes a raw SQL query with `DbParameter` parameters.
+- **Query_ExecuteReader(string query, string name_column)**  
+  Executes a query and returns a single value from a specified column.
+- **Query_ExecuteReaders(string query, string name_column)**  
+  Executes a query and returns multiple values from a specified column.
+- **Request_GetLastId()**  
+  Retrieves the maximum ID from the database table.
+
+---
+
+#### **Asynchronous Methods**
+
+##### **Connection Management**
+- **OpenConnectionAsync()**  
+  Asynchronously opens the database connection.
+- **CloseConnectionAsync()**  
+  Asynchronously closes the database connection.
+
+##### **Data Retrieval**
+- **Query_SelectAllAsync(bool isChangeLocalData = false)**  
+  Asynchronously retrieves all records from the database table, optionally updating `_data`.
+- **Query_SelectByIdAsync(int id)**  
+  Asynchronously retrieves a record by ID.
+- **Query_SelectByQueryAsync(string query, params string[] args)**  
+  Asynchronously executes a custom query with parameters and returns a single record.
+- **Query_SelectByQueryAsync(string query, List<DbParameter> args)**  
+  Asynchronously executes a custom query with `DbParameter` parameters and returns a single record.
+- **Query_SelectsByQueryAsync(string query, params string[] args)**  
+  Asynchronously executes a custom query with parameters and returns multiple records.
+- **Query_SelectsByQueryAsync(string query, List<DbParameter> args)**  
+  Asynchronously executes a custom query with `DbParameter` parameters and returns multiple records.
+
+##### **Data Modification**
+- **Query_InsertAsync(T d, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Asynchronously inserts a record into the database, optionally updating `_data`.
+- **Query_InsertAsync(T d, List<DbParameter> args, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Asynchronously inserts a record using `DbParameter` parameters, optionally updating `_data`.
+- **Query_UpdateByIdAsync(T d, bool isChangeLocalData = false)**  
+  Asynchronously updates a record by ID, optionally updating `_data`.
+- **Query_UpdateByIdAsync(T d, List<DbParameter> args, bool isChangeLocalData = false)**  
+  Asynchronously updates a record using `DbParameter` parameters, optionally updating `_data`.
+- **Query_DeleteByIdAsync(int id, bool isChangeLocalData = false)**  
+  Asynchronously deletes a record by ID, optionally updating `_data`.
+- **Query_ClearTableAsync()**  
+  Asynchronously clears the database table and `_data`.
+- **Query_SaveAsync(bool isParamQueryWithId = false)**  
+  Asynchronously saves `_data` to the database in a transaction.
+- **Query_SaveAsync(List<DbParameter> args, bool isParamQueryWithId = false)**  
+  Asynchronously saves `_data` using `DbParameter` parameters in a transaction.
+- **Query_SaveAsync(List<T> data, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Asynchronously saves an external list to the database in a transaction, optionally updating `_data`.
+- **Query_SaveAsync(List<T> data, List<DbParameter> args, bool isChangeLocalData = false, bool isParamQueryWithId = false)**  
+  Asynchronously saves an external list using `DbParameter` parameters in a transaction, optionally updating `_data`.
+
+##### **Utility Methods**
+- **Query_ExecuteAsync(string query)**  
+  Asynchronously executes a raw SQL query.
+- **Query_ExecuteAsync(string query, List<DbParameter> args)**  
+  Asynchronously executes a raw SQL query with `DbParameter` parameters.
+- **Query_ExecuteReaderAsync(string query, string name_column)**  
+  Asynchronously executes a query and returns a single value from a specified column.
+- **Query_ExecuteReadersAsync(string query, string name_column)**  
+  Asynchronously executes a query and returns multiple values from a specified column.
+- **Request_GetLastIdAsync()**  
+  Asynchronously retrieves the maximum ID from the database table.
+
+---
+
+### **Key Notes**
+- **Synchronous vs. Asynchronous**: Most methods have both synchronous and asynchronous versions.
+- **Local Data (`_data`)**: Many methods optionally sync changes with the internal `_data` list.
+- **Transactions**: `Query_Save` methods use transactions for batch operations.
+- **Parameterization**: Supports both inline parameters (`@param{i}`) and `DbParameter` objects for security.
+  
 === Attention! ===
 ======================
 Before using it, make sure that the code in your project is working correctly. Correct operation is NOT guaranteed, comprehensive testing is required within your system.
