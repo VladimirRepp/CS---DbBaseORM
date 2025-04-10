@@ -201,43 +201,43 @@ Before using it, make sure that the code in your project is working correctly. C
   - Query_SaveAsync
   - Query_ClearTableAsync
  - Output example:
-
+   
+Example of Insert and InsertAsync:
 ![1](https://github.com/user-attachments/assets/d00ec76e-7898-404e-aa0c-ac25f825fb02)
-     Example of Insert and InsertAsync
-    ---
-![2](https://github.com/user-attachments/assets/00f6d5ca-7255-4198-9d26-dc49974668ff)
-     Example of Select
-    --- 
-![3](https://github.com/user-attachments/assets/5778b7f7-dc71-4973-81fe-6817f323b0d8)
-     Example of SelectAsync
-
-![4](https://github.com/user-attachments/assets/d8849e65-cf27-4b2f-86fa-3715a5ba5f97)
-     Example of UpdateById and UpdateByIdAsync
      
+Example of Select:
+![2](https://github.com/user-attachments/assets/00f6d5ca-7255-4198-9d26-dc49974668ff)
+     
+Example of SelectAsync:
+![3](https://github.com/user-attachments/assets/5778b7f7-dc71-4973-81fe-6817f323b0d8)
+     
+Example of UpdateById and UpdateByIdAsync:
+![4](https://github.com/user-attachments/assets/d8849e65-cf27-4b2f-86fa-3715a5ba5f97)
+     
+Example of DeleteById and DeleteByIdAsync:
 ![5](https://github.com/user-attachments/assets/acdc068a-876b-485b-8984-b5d92bbbcdd0)
-     Example of DeleteById and DeleteByIdAsync
- 
+     
+Example of Save (with data inside):
 ![6](https://github.com/user-attachments/assets/b848a7c3-6fe7-450c-93e6-43dd2009bc5b)
-     Example of Save (with data inside)
- 
+     
+Example of SaveAsync (with data inside):
 ![7](https://github.com/user-attachments/assets/2adda5d5-23d4-487f-b55e-1ba6d6b97f0a)
-     Example of SaveAsync (with data inside)
- 
+     
+Example of Save (with data outside and isChangeLocalData: false):
 ![8](https://github.com/user-attachments/assets/2d23130e-53b7-416c-8697-8401853144a0)
-     Example of Save (with data outside and isChangeLocalData: false)
- 
+     
+Example of Save (with data outside and isChangeLocalData: true):
 ![9](https://github.com/user-attachments/assets/0ac50aee-9587-4475-ae77-e5ab44f72219)
-     Example of Save (with data outside and isChangeLocalData: true)
- 
+     
+Example of SaveAsync (with data outside and isChangeLocalData: false): 
 ![10](https://github.com/user-attachments/assets/cd34c130-0d60-4ea3-aeb4-0678a77a43d6)
-     Example of SaveAsync (with data outside and isChangeLocalData: false)
- 
+     
+Example of SaveAsync (with data outside and isChangeLocalData: true):
 ![11](https://github.com/user-attachments/assets/501256a9-0fa0-48ea-bb8c-052b65f709f4)
-     Example of SaveAsync (with data outside and isChangeLocalData: true)
- 
+     
+Example of ClearTable and ClearTableAsync:
 ![12](https://github.com/user-attachments/assets/2a71b9aa-b034-454f-8659-04981c46f9b6)
-     Example of ClearTable and ClearTableAsync
- 
+     
 
 === TODO on next release: ===
 ======================
