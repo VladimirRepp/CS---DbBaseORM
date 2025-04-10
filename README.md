@@ -201,12 +201,13 @@ Before using it, make sure that the code in your project is working correctly. C
   - Query_SaveAsync
   - Query_ClearTableAsync
  - Output example:
+
 ![1](https://github.com/user-attachments/assets/d00ec76e-7898-404e-aa0c-ac25f825fb02)
      Example of Insert and InsertAsync
-
+    ---
 ![2](https://github.com/user-attachments/assets/00f6d5ca-7255-4198-9d26-dc49974668ff)
      Example of Select
-     
+    --- 
 ![3](https://github.com/user-attachments/assets/5778b7f7-dc71-4973-81fe-6817f323b0d8)
      Example of SelectAsync
 
