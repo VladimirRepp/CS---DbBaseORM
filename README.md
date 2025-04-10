@@ -110,7 +110,7 @@ Ways to work with controllers: Each controller is associated with a single table
   Executes a query and returns a single value from a specified column.
 - **Query_ExecuteReaders(string query, string name_column)**  
   Executes a query and returns multiple values from a specified column.
-- **Request_GetLastId()**  
+- **Query_GetLastId()**  
   Retrieves the maximum ID from the database table.
 
 ---
@@ -168,7 +168,7 @@ Ways to work with controllers: Each controller is associated with a single table
   Asynchronously executes a query and returns a single value from a specified column.
 - **Query_ExecuteReadersAsync(string query, string name_column)**  
   Asynchronously executes a query and returns multiple values from a specified column.
-- **Request_GetLastIdAsync()**  
+- **Query_GetLastIdAsync()**  
   Asynchronously retrieves the maximum ID from the database table.
 
 ---
