@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.Common;
 using DbBaseORM.Models;
 
@@ -54,6 +54,13 @@ namespace DbBaseORM.Controllers
         public DbProviderFactory? DbProviderFactory => _dbProviderFactory;
         #endregion
 
+
+        /// <summary>
+        /// Инициализирует контроллер с помощью поставщика базы данных, строки подключения и необязательного имени таблицы. Устанавливает подключение к базе данных.
+        /// </summary>
+        /// <param name="providerName"></param>
+        /// <param name="connectionString"></param>
+        /// <param name="tableName"></param>
         public DbBaseController(string providerName, string connectionString,  string tableName = "")
         {
             _data = new List<T>();
@@ -98,7 +105,7 @@ namespace DbBaseORM.Controllers
         #region === Synchronous actions with local Data and Query in DB === 
 
         /// <summary>
-        /// Открытие соединения к БД
+        /// Открывает подключение к базе данных, если оно еще не открыто.
         /// </summary>
         private void OpenConnection()
         {
@@ -107,7 +114,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Закрытие соединения к БД
+        /// Закрывает соединение с базой данных, если оно еще не закрыто.
         /// </summary>
         private void CloseConnection()
         {
@@ -116,7 +123,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Возвращение индекса из Data (List<T>) по ID
+        /// Возвращает индекс элемента в "_data" по его идентификатору.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -126,7 +133,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Вернуть найденный элемент из Data (List<T>) по ID
+        /// Извлекает элемент из "_data" по его идентификатору.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -136,7 +143,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Попытка вернуть найденный элемент из Data (List<T>) по ID
+        /// Пытается извлечь элемент из "_data" по его идентификатору; возвращает значение "true", если он найден.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="findemItem"></param>
@@ -148,7 +155,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Запрос выбороки всех данных из таблицы БД в локальный список Data(List<T>)
+        /// Извлекает одну запись из базы данных по идентификатору.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -193,7 +200,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Запрос выборки данных по ID из таблицы БД в локальную переменную
+        /// Извлекает одну запись из базы данных по идентификатору.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -240,7 +247,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса в локальную переменную
+        /// Выполняет пользовательский запрос с параметрами и возвращает одну запись.
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -292,7 +299,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами в локальную переменную 
+        /// Выполняет пользовательский запрос с параметрами `DbParameter` и возвращает одну запись. 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -339,7 +346,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса в локальный список
+        /// Выполняет пользовательский запрос с параметрами и возвращает несколько записей.
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -393,7 +400,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами в локальный список
+        /// Выполняет пользовательский запрос с параметрами `DbParameter` и возвращает несколько записей.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -442,7 +449,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Попытка получить данные по ID из таблицы БД в локальную переменную
+        /// Пытается получить запись по идентификатору; возвращает `true`, если она найдена.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="found"></param>
@@ -463,7 +470,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Вставка данных в Data (List<T>) и запрос встаки в БД
+        /// Вставляет запись в базу данных, при необходимости обновляя `_data` и обрабатывая генерацию идентификатора.
         /// </summary>
         /// <param name="d"></param>
         /// <param name="isParamQueryWithId"></param>
@@ -526,7 +533,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Вставка данных в Data (List<T>) и запрос встаки в БД
+        /// Вставляет запись, используя параметры `DbParameter`, при необходимости обновляя `_data`.
         /// </summary>
         /// <param name="d"></param>
         /// <param name="args"></param>
@@ -579,7 +586,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Обновление данных в Data (List<T>) и запрос обновления в БД
+        /// Обновляет запись в базе данных по идентификатору, при необходимости обновляя "_data".
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
@@ -634,7 +641,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Обновление данных в Data (List<T>) и запрос обновления в БД
+        /// Обновляет запись, используя параметры `DbParameter`, при необходимости обновляя `_data`.
         /// </summary>
         /// <param name="d"></param>
         /// <param name="args"></param>
@@ -679,7 +686,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Удаление данных по ID в Data (List<T>) и запрос удаления в БД
+        /// Удаляет запись по идентификатору, при необходимости обновляя "_data".
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -723,11 +730,11 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Очистка Data (List<T>) и запрос очистки таблицы в БД
+        /// Очищает таблицу базы данных и при необходимости `_data`.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public bool Query_ClearTable()
+        public bool Query_ClearTable(bool isChangeLocalData = false)
         {
             bool isDone = false;
 
@@ -738,7 +745,9 @@ namespace DbBaseORM.Controllers
 
                 OpenConnection();
                 command.ExecuteNonQuery();
-                _data.Clear();
+
+                if (isChangeLocalData)
+                    _data.Clear();
             }
             catch (Exception ex)
             {
@@ -753,11 +762,11 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Вернуть последний наибольший ID в таблицы БД
+        /// Извлекает максимальный идентификатор из таблицы базы данных.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public int Request_GetLastId()
+        public int Query_GetLastId()
         {
             DbDataReader reader = null;
             int last_id = -1;
@@ -793,10 +802,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция. 
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из _data в таблицу
+        /// Сохраняет "_data` в базе данных в транзакции (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -871,10 +877,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция.
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из _data в таблицу
+        /// Cохраняет "_data" в базе данных, используя параметры "DbParameter" в транзакции (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -938,10 +941,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция. 
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из data в таблицу
+        /// Сохраняет внешний список в базе данных в транзакции, при необходимости обновляя `_data` (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1025,10 +1025,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция.
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из data в таблицу
+        ///  Сохраняет внешний список, используя параметры "DbParameter" в транзакции, при необходимости обновляя "_data` (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1098,7 +1095,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить запрос к БД
+        /// Выполняет необработанный запрос.
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -1129,7 +1126,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить запрос к БД
+        /// Выполняет необработанный запрос с параметрами `DbParameter`.
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -1163,7 +1160,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить запрос к БД с возвращаемым результатом в локальную переменную 
+        /// Выполняет запрос и возвращает единственное значение из указанного столбца. 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
@@ -1205,7 +1202,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить запрос к БД с возвращаемым результатом
+        /// Выполняет запрос и возвращает несколько значений из указанного столбца.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
@@ -1250,7 +1247,7 @@ namespace DbBaseORM.Controllers
 
         #region === Asynchronous actions with local Data and Query in DB === 
         /// <summary>
-        /// Асинхронное открытие соединения к БД 
+        /// Асинхронно открывает соединение с базой данных.
         /// </summary>
         /// <returns></returns>
         private async Task OpenConnectionAsync()
@@ -1260,7 +1257,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное закрытие соединения к БД
+        ///   Асинхронно закрывает соединение с базой данных.
         /// </summary>
         /// <returns></returns>
         private async Task CloseConnectionAsync()
@@ -1270,7 +1267,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронный запрос выборки всех данных в локальный список Data(List<T>)
+        /// Асинхронно извлекает все записи из таблицы базы данных, при необходимости обновляя `_data`.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1315,7 +1312,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронный запрос выборки по ID в локальную переменную 
+        /// Асинхронно извлекает запись по идентификатору. 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1362,7 +1359,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронная выборка данных по строке запроса в локальную переменную
+        /// Асинхронно выполняет пользовательский запрос с параметрами и возвращает одну запись.
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -1414,7 +1411,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами 
+        /// Асинхронно выполняет пользовательский запрос с параметрами `DbParameter` и возвращает одну запись.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -1461,7 +1458,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса
+        /// Асинхронно выполняет пользовательский запрос с параметрами и возвращает несколько записей.
         /// </summary>
         /// <param name="query"> - строка запроса, требования к именам аргументов запросов @param+индекс</param>
         /// <param name="args"> - аргументы запрса</param>
@@ -1515,7 +1512,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выборка данных по строке запроса с указанными параметрами 
+        /// Асинхронно выполняет пользовательский запрос с параметрами `DbParameter` и возвращает несколько записей. 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="args"></param>
@@ -1564,7 +1561,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронная вставка данных в Data (List<T>) и запрос вставки в БД
+        /// Асинхронно вставляет запись в базу данных, при необходимости обновляя `_data`.
         /// </summary>
         /// <param name="d"></param>
         /// <param name="isParamQueryWithId"></param>
@@ -1629,7 +1626,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронная вставка данных в Data (List<T>) и запрос вставки в БД
+        /// Асинхронно вставляет запись, используя параметры `DbParameter`, при необходимости обновляя `_data`.
         /// </summary>
         /// <param name="d"></param>
         /// <param name="args"></param>
@@ -1682,7 +1679,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное обновление данных в Data (List<T>) и запрос обновления в БД
+        /// Асинхронно обновляет запись по идентификатору, при необходимости обновляя `_data`.
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
@@ -1737,7 +1734,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное обновление данных в Data (List<T>) и запрос обновления в БД
+        /// Асинхронно обновляет запись, используя параметры "DbParameter", при необходимости обновляя "_data".
         /// </summary>
         /// <param name="d"></param>
         /// <param name="args"></param>
@@ -1782,7 +1779,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное удаление данных из Data (List<T>) и запрос удаления из БД
+        /// Асинхронно удаляет запись по идентификатору, при необходимости обновляя "_data".
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1827,11 +1824,11 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронная очистка Data (List<T>) и запрос очистки таблицы в БД
+        /// Асинхронно очищает таблицу базы данных и при необходимости `_data`.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> Query_ClearTableAsync()
+        public async Task<bool> Query_ClearTableAsync(bool isChangeLocalData = false)
         {
             bool isDone = false;
 
@@ -1842,7 +1839,9 @@ namespace DbBaseORM.Controllers
 
                 await OpenConnectionAsync();
                 await command.ExecuteNonQueryAsync();
-                _data.Clear();
+
+                if(isChangeLocalData)
+                    _data.Clear();
             }
             catch (Exception ex)
             {
@@ -1857,11 +1856,11 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронный запрос к БД по возвращению последнего наибольшего ID
+        /// Асинхронно извлекает максимальный идентификатор из таблицы базы данных.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<int> Request_GetLastIdAsync()
+        public async Task<int> Query_GetLastIdAsync()
         {
             DbDataReader reader = null;
             int last_id = -1;
@@ -1897,10 +1896,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное сохранение локальных данных в БД. Используется транзакция. 
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из _data в таблицу
+        /// Асинхронно сохраняет `_data` в базе данных в транзакции (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -1975,10 +1971,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Асинхронное сохранение локальных данных в БД. Используется транзакция. 
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из _data в таблицу
+        /// Асинхронно сохраняет "_data", используя параметры `DbParameter` в транзакции (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -2039,10 +2032,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция. 
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из data в таблицу
+        /// Асинхронно сохраняет внешний список в базе данных в транзакции, при необходимости обновляя "_data` (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -2128,10 +2118,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Сохранение локальных данных в БД. Используется транзакция.
-        /// Алгоритм: 
-        /// 1. Очистить таблицу 
-        /// 2. Добавить данные из data в таблицу
+        /// Асинхронно сохраняет внешний список, используя параметры "DbParameter" в транзакции, при необходимости обновляя "_data" (сначала обрезает таблицу).
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -2203,7 +2190,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД
+        /// Асинхронно выполняет необработанный запрос.
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -2234,7 +2221,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД
+        /// Асинхронно выполняет необработанный запрос с параметрами `DbParameter`.
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -2268,7 +2255,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД с возвращаемым результатом в локальную переменную 
+        /// Асинхронно выполняет запрос и возвращает единственное значение из указанного столбца.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="name_column"></param>
@@ -2311,8 +2298,8 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Выполнить асинхронный запрос к БД с возвращаемым результатом в локальный список 
-        /// </summary>
+        /// Асинхронно выполняет запрос и возвращает несколько значений из указанного столбца. 
+        /// </summary>a
         /// <param name="query"></param>
         /// <param name="name_column"></param>
         /// <returns></returns>
