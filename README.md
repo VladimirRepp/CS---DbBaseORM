@@ -66,6 +66,8 @@ Ways to work with controllers: Each controller is associated with a single table
   Attempts to retrieve an item from `_data` by its ID; returns `true` if found.
 - **Query_SelectAll(bool isChangeLocalData = false)**  
   Retrieves all records from the database table, optionally updating `_data`.
+- **Query_SelectByLimit(int offset, int limit, bool isChangeLocalData = false)**  
+  Retrieves all records from the database in the range from `offset` to `limit', updating `_data` if necessary. Numbering starts from 0.
 - **Query_SelectById(int id)**  
   Retrieves a single record from the database by ID.
 - **Query_SelectByQuery(string query, params string[] args)**  
@@ -126,6 +128,8 @@ Ways to work with controllers: Each controller is associated with a single table
 ##### **Data Retrieval**
 - **Query_SelectAllAsync(bool isChangeLocalData = false)**  
   Asynchronously retrieves all records from the database table, optionally updating `_data`.
+- **Query_SelectByLimitAsync(int offset, int limit, bool isChangeLocalData = false)**  
+  Asynchronously retrieves all records from the database in the range from `offset` to `limit', updating `_data` if necessary. Numbering starts from 0.
 - **Query_SelectByIdAsync(int id)**  
   Asynchronously retrieves a record by ID.
 - **Query_SelectByQueryAsync(string query, params string[] args)**  
