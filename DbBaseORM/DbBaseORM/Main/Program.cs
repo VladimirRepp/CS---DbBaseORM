@@ -1,4 +1,4 @@
-﻿using DbBaseORM.Controllers;
+using DbBaseORM.Controllers;
 using DbBaseORM.Global;
 using DbBaseORM.Models;
 using System.Data.Common;
@@ -37,6 +37,16 @@ namespace DbBaseORM
             ConsolePause();
 
             // === Selecting All === //
+            users.Query_SelectByLimit(1, 2, isChangeLocalData: true);
+            Console.WriteLine("\nTesting Query_SelectByLimit (data inside): ");
+            Print(users.Data);
+            Console.WriteLine();
+
+            await users.Query_SelectByLimitAsync(2, 1, isChangeLocalData: true);
+            Console.WriteLine("\nTesting Query_SelectByLimit (data inside): ");
+            Print(users.Data);
+            Console.WriteLine();
+
             users.Query_SelectAll(isChangeLocalData: true);
             List<DbUser> users_data = users.Query_SelectAll();
 
