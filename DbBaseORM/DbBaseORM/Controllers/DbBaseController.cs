@@ -155,7 +155,7 @@ namespace DbBaseORM.Controllers
         }
 
         /// <summary>
-        /// Извлекает одну запись из базы данных по идентификатору.
+        /// Извлекает все записи из базы данных, при необходимости обновляя `_data`.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -186,6 +186,65 @@ namespace DbBaseORM.Controllers
             catch (Exception ex)
             {
                 throw new Exception($"DbBaseController.Query_SelectAll(Exception): {ex.Message}");
+            }
+            finally
+            {
+                reader?.Close();
+                CloseConnection();
+            }
+
+            if (isChangeLocalData)
+                _data = data;
+
+            return data;
+        }
+
+        /// <summary>
+        /// Извлекает все записи из базы данных в диапазоне от `offset` до `limit`, при необходимости обновляя `_data`. Нумерация с 0.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<T> Query_SelectByLimit(int offset, int limit, bool isChangeLocalData = false)
+        {
+            DbDataReader reader = null;
+            List<T> data = new();
+
+            try
+            {
+                DbCommand command = _dbConnection.CreateCommand();
+                command.CommandText = $"Select * From {_tableName} \r\n" +
+                    $"ORDER BY Id \r\n" +
+                    $"OFFSET @p_offset ROWS \r\n" +
+                    $"FETCH NEXT @p_limit ROWS ONLY;";
+
+                DbParameter parameter_limit = command.CreateParameter();
+                parameter_limit.ParameterName = $"@p_limit";
+                parameter_limit.Value = limit;
+
+                DbParameter parameter_offset = command.CreateParameter();
+                parameter_offset.ParameterName = $"@p_offset";
+                parameter_offset.Value = offset;
+
+                command.Parameters.Add(parameter_limit);
+                command.Parameters.Add(parameter_offset);
+
+                OpenConnection();
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        T new_data = new();
+                        new_data.SetData(ref reader);
+
+                        data.Add(new_data);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DbBaseController.Query_SelectByLimit(Exception): {ex.Message}");
             }
             finally
             {
@@ -1298,6 +1357,65 @@ namespace DbBaseORM.Controllers
             catch (Exception ex)
             {
                 throw new Exception($"DbBaseController.Query_SelectAllAsync(Exception): {ex.Message}");
+            }
+            finally
+            {
+                reader?.CloseAsync();
+                await CloseConnectionAsync();
+            }
+
+            if (isChangeLocalData)
+                _data = data;
+
+            return data;
+        }
+
+        /// <summary>
+        /// Асинхронно извлекает все записи из базы данных в диапазоне от `offset` до `limit`, при необходимости обновляя `_data`. Нумерация с 0.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<List<T>> Query_SelectByLimitAsync(int offset, int limit, bool isChangeLocalData = false)
+        {
+            DbDataReader reader = null;
+            List<T> data = new();
+
+            try
+            {
+                DbCommand command = _dbConnection.CreateCommand();
+                command.CommandText = $"Select * From {_tableName} \r\n" +
+                    $"ORDER BY Id \r\n" +
+                    $"OFFSET @p_offset ROWS \r\n" +
+                    $"FETCH NEXT @p_limit ROWS ONLY;";
+
+                DbParameter parameter_limit = command.CreateParameter();
+                parameter_limit.ParameterName = $"@p_limit";
+                parameter_limit.Value = limit;
+
+                DbParameter parameter_offset = command.CreateParameter();
+                parameter_offset.ParameterName = $"@p_offset";
+                parameter_offset.Value = offset;
+
+                command.Parameters.Add(parameter_limit);
+                command.Parameters.Add(parameter_offset);
+
+                await OpenConnectionAsync();
+                reader = await command.ExecuteReaderAsync();
+
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        T new_data = new();
+                        new_data.SetData(ref reader);
+
+                        data.Add(new_data);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DbBaseController.Query_SelectByLimitAsync(Exception): {ex.Message}");
             }
             finally
             {
