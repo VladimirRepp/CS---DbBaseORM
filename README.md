@@ -5,7 +5,7 @@ A simple ORM based on C#, .Net9, ADO.Net and Provider factories
 ======================
 - v1.0
 - IDE: MVS 2022
-- C# / .Net9 / Console App
+- Primary: C# / .Net9 / Console App / SQl Server
 - ADO.Net
 - Provider Factory
 - Source project platform: Microsoft.NETCore.App (9.0.0)
