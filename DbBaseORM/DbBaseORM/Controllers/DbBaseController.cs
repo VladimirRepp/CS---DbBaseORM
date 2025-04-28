@@ -7,10 +7,12 @@ namespace DbBaseORM.Controllers
     public class DbBaseController<T> where T : IBaseModel, new()
     {
         #region === Private fields ===
+       
         private object _locker = new object();
         #endregion
 
         #region === Protected fields ===
+       
         protected List<T> _data = null;
         protected string? _tableName = null;
         protected string? _connectionString = null;
@@ -20,6 +22,7 @@ namespace DbBaseORM.Controllers
         #endregion
 
         #region === Public properties ===
+       
         public int Count => _data.Count;
         public T this[int index]
         {
@@ -54,7 +57,6 @@ namespace DbBaseORM.Controllers
         public DbConnection? DbConnection => _dbConnection;
         public DbProviderFactory? DbProviderFactory => _dbProviderFactory;
         #endregion
-
 
         /// <summary>
         /// Инициализирует контроллер с помощью поставщика базы данных, строки подключения и необязательного имени таблицы. Устанавливает подключение к базе данных.
