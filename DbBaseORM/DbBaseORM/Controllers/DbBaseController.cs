@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using DbBaseORM.Models;
 
@@ -38,7 +38,8 @@ namespace DbBaseORM.Controllers
                 }
             }
         }
-        public List<T> Data { 
+        public List<T> Data
+        {
             get
             {
                 lock (_locker)
@@ -61,7 +62,7 @@ namespace DbBaseORM.Controllers
         /// <param name="providerName"></param>
         /// <param name="connectionString"></param>
         /// <param name="tableName"></param>
-        public DbBaseController(string providerName, string connectionString,  string tableName = "")
+        public DbBaseController(string providerName, string connectionString, string tableName = "")
         {
             _data = new List<T>();
             _tableName = tableName;
@@ -79,7 +80,6 @@ namespace DbBaseORM.Controllers
             _dbConnection = _dbProviderFactory.CreateConnection();
             _dbConnection.ConnectionString = _connectionString;
         }
-
         #endregion
 
         #region === Protected methods ===
@@ -99,7 +99,6 @@ namespace DbBaseORM.Controllers
         {
             return _data.RemoveAll(x => x.Id == id) == 1;
         }
-
         #endregion
 
         #region === Synchronous actions with local Data and Query in DB === 
@@ -152,6 +151,39 @@ namespace DbBaseORM.Controllers
         {
             findemItem = _data.FirstOrDefault(x => x.Id == id);
             return findemItem != null;
+        }
+
+        /// <summary>
+        /// Запрос возвращающий общее количество строк в таблице, включая или исключая NULL строки 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int Query_GetCount(bool withoutNullRows = false)
+        {
+            int count = 0;
+
+            try
+            {
+                DbCommand command = _dbConnection.CreateCommand();
+                
+                if(!withoutNullRows)
+                    command.CommandText = $"SELECT COUNT(*) AS TotalCount FROM {_tableName}";
+                else
+                    command.CommandText = $"SELECT COUNT(Id) AS TotalCount FROM  {_tableName}";
+
+                OpenConnection();
+                count = (int)command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DbBaseController.Query_SelectAll(Exception): {ex.Message}");
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -566,13 +598,13 @@ namespace DbBaseORM.Controllers
                 }
 
                 OpenConnection();
-                if(isParamQueryWithId)
+                if (isParamQueryWithId)
                 {
                     if (command.ExecuteNonQuery() <= 0)
                         throw new Exception("ExecuteNonQuery <= 0");
                 }
                 else
-                { 
+                {
                     d.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
 
@@ -766,7 +798,7 @@ namespace DbBaseORM.Controllers
 
                 OpenConnection();
 
-                if(command.ExecuteNonQuery() <= 0)
+                if (command.ExecuteNonQuery() <= 0)
                 {
                     throw new Exception("ExecuteNonQuery <= 0");
                 }
@@ -842,7 +874,7 @@ namespace DbBaseORM.Controllers
                 {
                     while (reader.Read())
                     {
-                        if(reader["IdValue"] != DBNull.Value)
+                        if (reader["IdValue"] != DBNull.Value)
                             last_id = Convert.ToInt32(reader["IdValue"]);
                     }
                 }
@@ -886,7 +918,7 @@ namespace DbBaseORM.Controllers
                 {
                     string toParamsQuery = isParamQueryWithId ? d.ToParamsInsertQueryWithID : d.ToParamsInsertQueryWithoutID;
                     command.CommandText = $"INSERT INTO {_tableName} {toParamsQuery};";
-                    if (!isParamQueryWithId) 
+                    if (!isParamQueryWithId)
                         command.CommandText += " SELECT SCOPE_IDENTITY();";
 
                     command.Parameters.Clear();
@@ -909,7 +941,7 @@ namespace DbBaseORM.Controllers
                         command.Parameters.Add(parameter);
                     }
 
-                    if(!isParamQueryWithId)
+                    if (!isParamQueryWithId)
                     {
                         _data[index].Id = Convert.ToInt32(command.ExecuteScalar());
                     }
@@ -924,7 +956,7 @@ namespace DbBaseORM.Controllers
 
                 transaction.Commit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 transaction?.Rollback();
                 throw new Exception($"DbBaseController.Query_Save(Exception): {ex.Message}");
@@ -1172,7 +1204,7 @@ namespace DbBaseORM.Controllers
 
                 isDone = command.ExecuteNonQuery() > 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"DbBaseController.Query_Execute(Exception): {ex.Message}");
             }
@@ -1239,9 +1271,10 @@ namespace DbBaseORM.Controllers
 
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows) 
+                if (reader.HasRows)
                 {
-                    while (reader.Read()) {
+                    while (reader.Read())
+                    {
                         result = reader.GetValue(name_column);
                     }
                 }
@@ -1305,6 +1338,7 @@ namespace DbBaseORM.Controllers
         #endregion
 
         #region === Asynchronous actions with local Data and Query in DB === 
+        
         /// <summary>
         /// Асинхронно открывает соединение с базой данных.
         /// </summary>
@@ -1323,6 +1357,39 @@ namespace DbBaseORM.Controllers
         {
             if (_dbConnection.State != ConnectionState.Closed)
                 await _dbConnection.CloseAsync();
+        }
+
+        /// <summary>
+        /// Асинхронный запрос возвращающий общее количество строк в таблице, включая или исключая NULL строки 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<int> Query_GetCountAsync(bool withoutNullRows = false)
+        {
+            int count = 0;
+
+            try
+            {
+                DbCommand command = _dbConnection.CreateCommand();
+
+                if (!withoutNullRows)
+                    command.CommandText = $"SELECT COUNT(*) AS TotalCount FROM {_tableName}";
+                else
+                    command.CommandText = $"SELECT COUNT(Id) AS TotalCount FROM  {_tableName}";
+
+                await OpenConnectionAsync();
+                count = (int)command.ExecuteScalarAsync().Result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"DbBaseController.Query_SelectAll(Exception): {ex.Message}");
+            }
+            finally
+            {
+                CloseConnectionAsync();
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -1958,7 +2025,7 @@ namespace DbBaseORM.Controllers
                 await OpenConnectionAsync();
                 await command.ExecuteNonQueryAsync();
 
-                if(isChangeLocalData)
+                if (isChangeLocalData)
                     _data.Clear();
             }
             catch (Exception ex)
@@ -1995,7 +2062,7 @@ namespace DbBaseORM.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        if(reader["IdValue"] != DBNull.Value)
+                        if (reader["IdValue"] != DBNull.Value)
                             last_id = Convert.ToInt32(reader["IdValue"]);
                     }
                 }
