@@ -42,7 +42,7 @@ namespace DbBaseORM.Models
             _id = Convert.ToInt32(reader["Id"]);
 
             if (reader["TelegramId"] != DBNull.Value)
-                TelegramId = Convert.ToInt32(reader["TelegramId"]);
+                TelegramId = Convert.ToInt64(reader["TelegramId"]);
 
             if (reader["FullName"] != DBNull.Value)
                 FullName = reader["FullName"].ToString();
