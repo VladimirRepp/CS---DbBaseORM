@@ -108,7 +108,7 @@ namespace DbBaseORM.Controllers
         /// <summary>
         /// Открывает подключение к базе данных, если оно еще не открыто.
         /// </summary>
-        private void OpenConnection()
+        protected void OpenConnection()
         {
             if (_dbConnection.State != ConnectionState.Open)
                 _dbConnection.Open();
@@ -117,7 +117,7 @@ namespace DbBaseORM.Controllers
         /// <summary>
         /// Закрывает соединение с базой данных, если оно еще не закрыто.
         /// </summary>
-        private void CloseConnection()
+        protected void CloseConnection()
         {
             if (_dbConnection.State != ConnectionState.Closed)
                 _dbConnection.Close();
@@ -1345,7 +1345,7 @@ namespace DbBaseORM.Controllers
         /// Асинхронно открывает соединение с базой данных.
         /// </summary>
         /// <returns></returns>
-        private async Task OpenConnectionAsync()
+        protected async Task OpenConnectionAsync()
         {
             if (_dbConnection.State != ConnectionState.Open)
                 await _dbConnection.OpenAsync();
@@ -1355,7 +1355,7 @@ namespace DbBaseORM.Controllers
         ///   Асинхронно закрывает соединение с базой данных.
         /// </summary>
         /// <returns></returns>
-        private async Task CloseConnectionAsync()
+        protected async Task CloseConnectionAsync()
         {
             if (_dbConnection.State != ConnectionState.Closed)
                 await _dbConnection.CloseAsync();
